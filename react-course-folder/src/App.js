@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
 //import Radium, { StyleRoot } from 'radium'
-import styled from "styled-components";
-import './App.css';
-import Person from './Person/Person'
-
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.alt ? 'orange' : 'lightgreen'};
-    color: black;
-  }
-`;
+// import styled from "styled-components";
+import classesCSS from './App.css';
+import Person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -69,6 +55,7 @@ class App extends Component {
   }
 
   render() {
+    let btnClass = [classesCSS.Button]
 
     let persons = null
     if (this.state.showPersons) {
@@ -103,20 +90,24 @@ class App extends Component {
           })}
         </div>
       )
+
+      btnClass.push(classesCSS.Red)
+
     }
 
-    let classes = ['green']
+    let assignedClasses = [classesCSS.green]
     if (this.state.persons.length <= 2) {
-      classes = ['red', 'bold'].join(' ')
+      assignedClasses = [classesCSS.bold, classesCSS.red].join(' ')
     }
 
     return (
-      <div className="App">
+      <div className={classesCSS.App}>
         <h1>Hello world react app</h1>
-        <p className={classes}>Demo text</p>
-        <StyledButton
-          alt={this.state.showPersons} onClick={() => this.togglePersonHandler()}>Mostrar: {String(this.state.showPersons)}
-        </StyledButton>
+        <p className={assignedClasses}>Demo text</p>
+        <p>{btnClass.join(' ')}</p>
+        <button className={btnClass.join(' ')}
+          onClick={this.togglePersonHandler}>Mostrar: {String(this.state.showPersons)}
+        </button>
         {persons}
         {this.state.showPersons ? <div> some dummy HTML from ternary conditional </div> : null}
         {persons2}
