@@ -1,25 +1,28 @@
 import React from 'react';
-import classes from "./SideDrawer.module.css"
-import Logo from "../../Logo/Logo"
-import NavigationItems from "../NavigationItems/NavigationItems"
-import Backdrop from "../../UI/Backdrop/Backdrop"
 
-const sideDrawer = (props) => {
+import Logo from '../../Logo/Logo';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import classes from './SideDrawer.css';
+import Backdrop from '../../UI/Backdrop/Backdrop';
+import Aux from '../../../hoc/Aux/Aux';
+
+const sideDrawer = ( props ) => {
     let attachedClasses = [classes.SideDrawer, classes.Close];
     if (props.open) {
-        attachedClasses = [classes.SideDrawer, classes.Open]
+        attachedClasses = [classes.SideDrawer, classes.Open];
     }
-
     return (
-        <React.Fragment>
+        <Aux>
             <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={attachedClasses.join(" ")}>
-                <Logo height="11%"/>
-                <nav className={classes.DesktopOnly}>
-                    <NavigationItems/>
+            <div className={attachedClasses.join(' ')}>
+                <div className={classes.Logo}>
+                    <Logo />
+                </div>
+                <nav>
+                    <NavigationItems />
                 </nav>
             </div>
-        </React.Fragment>
+        </Aux>
     );
 };
 
